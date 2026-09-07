@@ -1,6 +1,6 @@
 {
   "appId": "com.example.tensecondgame",
-  "appName": "10초 맞추기",
+  "appName": "10초 게임",
   "webDir": "www",
   "bundledWebRuntime": false
 }
