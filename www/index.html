@@ -15,158 +15,26 @@
     body{min-height:100vh;display:flex;justify-content:center;align-items:flex-start}
     .game{width:min(100%,560px);min-height:100vh;background:linear-gradient(180deg,#fffdf9,#fff8ef);border:1px solid #f7dfc1;border-radius:28px;padding:22px 16px 24px;text-align:center;position:relative;overflow:hidden;box-shadow:0 10px 35px rgba(102,70,35,.08)}
     .gear{position:absolute;right:14px;top:14px;width:44px;height:44px;border:2px solid #222;border-radius:50%;background:#fff;font-size:20px;cursor:pointer}
-    h1{margin:6px 0 0;font-size:30px;font-weight:900;letter-spacing:-1px}
-    .rule-top{margin-top:10px;font-size:14px;font-weight:800;color:var(--muted)}
-    .buddy-row{margin-top:22px;display:flex;gap:12px;align-items:center;justify-content:center}
-    .buddy{width:94px;height:94px;border:2px solid #ffd59e;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;position:relative}
-    .bubble{flex:1;min-width:0;min-height:92px;border:2px dashed #ffc36f;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px 16px;font-size:18px;font-weight:900;line-height:1.45;word-break:keep-all}
-    .timer{margin-top:26px;font-size:78px;line-height:1;font-weight:900;letter-spacing:-3px;font-variant-numeric:tabular-nums}
-    .seconds{margin-top:8px;font-size:13px;font-weight:900;letter-spacing:2px;color:var(--muted)}
-    .slots{margin-top:24px;display:flex;justify-content:center;gap:12px}
-    .slot{width:88px;height:100px;border:2px solid var(--line);border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:inset 0 -6px 14px rgba(255,151,15,.06)}
-    .slot.spin{animation:slotShake .22s linear infinite}
-    @keyframes slotShake{0%{transform:translateY(-2px)}50%{transform:translateY(2px)}100%{transform:translateY(-2px)}}
-    .result{min-height:48px;margin-top:24px;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1.35;padding:0 8px}
-    .result.fail{color:var(--red)}.result.ok{color:var(--ok)}.result.perfect{color:var(--perfect)}
-    .main{margin-top:8px;width:100%;min-height:88px;border:0;border-radius:24px;background:linear-gradient(180deg,var(--orange2),var(--orange));color:#fff;font-size:34px;font-weight:900;cursor:pointer;box-shadow:0 12px 24px rgba(255,138,0,.22)}
-    .main:active{transform:scale(.99)}
-    .again{margin-top:12px;border:0;border-radius:14px;background:#fff;padding:12px 18px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.06)}
-    .foot{margin-top:16px;font-size:13px;font-weight:800;line-height:1.6;color:var(--muted)}
-    .settings{display:none;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;gap:8px;flex-wrap:wrap;justify-content:center}
-    .settings.show{display:flex}
-    .settings input{width:120px;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font-size:16px}
-    .settings button{min-height:44px;border:0;border-radius:12px;padding:0 14px;font-weight:900;background:#fff0dd;color:var(--coffee);cursor:pointer}
-    .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-    .piece{position:absolute;width:9px;height:15px;border-radius:2px;animation:fall 1.6s linear forwards}
-    @keyframes fall{from{transform:translateY(-30px) rotate(0)}to{transform:translateY(650px) rotate(540deg)}}
-
-    .char-wrap{position:relative;width:64px;height:64px;transform-origin:center}
-    .char-main{position:absolute;inset:6px 4px;background:#fff;border:5px solid #2a211e;border-radius:50% 48% 52% 50%}
-    .char-bump{position:absolute;left:10px;top:-2px;width:22px;height:20px;background:#fff;border:5px solid #2a211e;border-bottom:0;border-right-width:4px;border-radius:55% 55% 0 0;transform:rotate(-10deg)}
-    .eye-left,.eye-right{position:absolute;background:#2a211e;transition:all .18s ease}
-    .mouth{position:absolute;transition:all .18s ease}
-    .tongue{position:absolute;background:#ff7a72;transition:all .18s ease}
-    .cheek-left,.cheek-right{position:absolute;top:34px;width:10px;height:8px;background:#ffb0a7;border-radius:50%;opacity:.9;transition:all .18s ease}
-    .cheek-left{left:8px}.cheek-right{right:8px}
-    .hand-left,.hand-right{position:absolute;bottom:6px;width:16px;height:14px;background:#fff;border:4px solid #2a211e;border-radius:50%}
-    .hand-left{left:2px}.hand-right{right:2px}
-    .spark1,.spark2{position:absolute;background:#ffbe4a;border-radius:6px;transition:all .18s ease}
-    .spark1{right:-3px;top:4px;width:7px;height:18px;transform:rotate(25deg)}
-    .spark2{right:8px;top:1px;width:7px;height:14px;transform:rotate(-20deg)}
-
-    .char-wrap.idle .eye-left{left:17px;top:24px;width:10px;height:12px;border-radius:50%}
-    .char-wrap.idle .eye-right{right:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(-18deg)}
-    .char-wrap.idle .mouth{left:25px;top:33px;width:12px;height:9px;border:4px solid #2a211e;border-top:0;border-radius:0 0 14px 14px;background:#ff8b86}
-    .char-wrap.idle .tongue{left:31px;top:38px;width:9px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 10px 10px;transform:rotate(8deg)}
-
-    .char-wrap.run-a{transform:translateY(-1px)}
-    .char-wrap.run-a .eye-left,.char-wrap.run-a .eye-right{top:25px;width:10px;height:10px;border-radius:50%}
-    .char-wrap.run-a .eye-left{left:16px}.char-wrap.run-a .eye-right{right:16px}
-    .char-wrap.run-a .mouth{left:22px;top:34px;width:20px;height:10px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}
-    .char-wrap.run-a .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
-
-    .char-wrap.run-b{transform:translateY(0)}
-    .char-wrap.run-b .eye-left{left:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(18deg)}
-    .char-wrap.run-b .eye-right{right:16px;top:24px;width:10px;height:12px;border-radius:50%}
-    .char-wrap.run-b .mouth{left:24px;top:33px;width:16px;height:11px;border:4px solid #2a211e;border-top:0;border-radius:0 0 16px 16px;background:#ff8b86}
-    .char-wrap.run-b .tongue{left:32px;top:38px;width:8px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 9px 9px}
-
-    .char-wrap.fast .eye-left,.char-wrap.fast .eye-right{top:24px;width:11px;height:13px;border-radius:50%}
-    .char-wrap.fast .eye-left{left:16px}.char-wrap.fast .eye-right{right:16px}
-    .char-wrap.fast .mouth{left:26px;top:34px;width:12px;height:13px;border:4px solid #2a211e;border-radius:50%;background:#ff9d97}
-    .char-wrap.fast .tongue{display:none}
-
-    .char-wrap.late .eye-left,.char-wrap.late .eye-right{top:26px;width:12px;height:4px;border-radius:10px}
-    .char-wrap.late .eye-left{left:15px;transform:rotate(35deg)}
-    .char-wrap.late .eye-right{right:15px;transform:rotate(-35deg)}
-    .char-wrap.late .mouth{left:24px;top:38px;width:16px;height:4px;border-radius:8px;background:#2a211e}
-    .char-wrap.late .tongue{display:none}
-
-    .char-wrap.success .eye-left,.char-wrap.success .eye-right{top:28px;width:14px;height:4px;border-radius:10px;background:#2a211e}
-    .char-wrap.success .eye-left{left:13px;transform:rotate(18deg)}
-    .char-wrap.success .eye-right{right:13px;transform:rotate(-18deg)}
-    .char-wrap.success .mouth{left:21px;top:33px;width:22px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 20px 20px;background:#ff8b86}
-    .char-wrap.success .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
-
-    .char-wrap.perfect .eye-left,.char-wrap.perfect .eye-right{top:23px;width:10px;height:10px;border-radius:50%}
-    .char-wrap.perfect .eye-left{left:16px;box-shadow:0 0 0 3px rgba(255,190,74,.35)}
-    .char-wrap.perfect .eye-right{right:16px;box-shadow:0 0 0 3px rgba(255,190,74,.35)}
-    .char-wrap.perfect .mouth{left:22px;top:32px;width:20px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}
-    .char-wrap.perfect .tongue{left:29px;top:38px;width:8px;height:9px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
-    .char-wrap.perfect .spark1{right:-4px;top:0;height:22px}
-    .char-wrap.perfect .spark2{right:8px;top:-3px;height:18px}
-
+    h1{margin:6px 0 0;font-size:30px;font-weight:900;letter-spacing:-1px}.rule-top{margin-top:10px;font-size:14px;font-weight:800;color:var(--muted)}
+    .buddy-row{margin-top:22px;display:flex;gap:12px;align-items:center;justify-content:center}.buddy{width:94px;height:94px;border:2px solid #ffd59e;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;position:relative}.bubble{flex:1;min-width:0;min-height:92px;border:2px dashed #ffc36f;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px 16px;font-size:18px;font-weight:900;line-height:1.45;word-break:keep-all}
+    .timer{margin-top:26px;font-size:78px;line-height:1;font-weight:900;letter-spacing:-3px;font-variant-numeric:tabular-nums}.seconds{margin-top:8px;font-size:13px;font-weight:900;letter-spacing:2px;color:var(--muted)}
+    .slots{margin-top:24px;display:flex;justify-content:center;gap:12px}.slot{width:88px;height:100px;border:2px solid var(--line);border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:inset 0 -6px 14px rgba(255,151,15,.06)}.slot.spin{animation:slotShake .22s linear infinite}@keyframes slotShake{0%{transform:translateY(-2px)}50%{transform:translateY(2px)}100%{transform:translateY(-2px)}}
+    .result{min-height:48px;margin-top:24px;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1.35;padding:0 8px}.result.fail{color:var(--red)}.result.ok{color:var(--ok)}.result.perfect{color:var(--perfect)}
+    .main{margin-top:8px;width:100%;min-height:88px;border:0;border-radius:24px;background:linear-gradient(180deg,var(--orange2),var(--orange));color:#fff;font-size:34px;font-weight:900;cursor:pointer;box-shadow:0 12px 24px rgba(255,138,0,.22)}.main:active{transform:scale(.99)}.again{margin-top:12px;border:0;border-radius:14px;background:#fff;padding:12px 18px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.06)}.foot{margin-top:16px;font-size:13px;font-weight:800;line-height:1.6;color:var(--muted)}
+    .settings{display:none;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff;gap:8px;flex-wrap:wrap;justify-content:center}.settings.show{display:flex}.settings input{width:120px;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:0 10px;font-size:16px}.settings button{min-height:44px;border:0;border-radius:12px;padding:0 14px;font-weight:900;background:#fff0dd;color:var(--coffee);cursor:pointer}
+    .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}.piece{position:absolute;width:9px;height:15px;border-radius:2px;animation:fall 1.6s linear forwards}@keyframes fall{from{transform:translateY(-30px) rotate(0)}to{transform:translateY(650px) rotate(540deg)}}
+    .char-wrap{position:relative;width:64px;height:64px;transform-origin:center}.char-main{position:absolute;inset:6px 4px;background:#fff;border:5px solid #2a211e;border-radius:50% 48% 52% 50%}.char-bump{position:absolute;left:10px;top:-2px;width:22px;height:20px;background:#fff;border:5px solid #2a211e;border-bottom:0;border-right-width:4px;border-radius:55% 55% 0 0;transform:rotate(-10deg)}.eye-left,.eye-right{position:absolute;background:#2a211e;transition:all .18s ease}.mouth{position:absolute;transition:all .18s ease}.tongue{position:absolute;background:#ff7a72;transition:all .18s ease}.cheek-left,.cheek-right{position:absolute;top:34px;width:10px;height:8px;background:#ffb0a7;border-radius:50%;opacity:.9}.cheek-left{left:8px}.cheek-right{right:8px}.hand-left,.hand-right{position:absolute;bottom:6px;width:16px;height:14px;background:#fff;border:4px solid #2a211e;border-radius:50%}.hand-left{left:2px}.hand-right{right:2px}.spark1,.spark2{position:absolute;background:#ffbe4a;border-radius:6px}.spark1{right:-3px;top:4px;width:7px;height:18px;transform:rotate(25deg)}.spark2{right:8px;top:1px;width:7px;height:14px;transform:rotate(-20deg)}
+    .char-wrap.idle .eye-left{left:17px;top:24px;width:10px;height:12px;border-radius:50%}.char-wrap.idle .eye-right{right:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(-18deg)}.char-wrap.idle .mouth{left:25px;top:33px;width:12px;height:9px;border:4px solid #2a211e;border-top:0;border-radius:0 0 14px 14px;background:#ff8b86}.char-wrap.idle .tongue{left:31px;top:38px;width:9px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 10px 10px;transform:rotate(8deg)}
+    .char-wrap.run-a .eye-left,.char-wrap.run-a .eye-right{top:25px;width:10px;height:10px;border-radius:50%}.char-wrap.run-a .eye-left{left:16px}.char-wrap.run-a .eye-right{right:16px}.char-wrap.run-a .mouth{left:22px;top:34px;width:20px;height:10px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}.char-wrap.run-a .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
+    .char-wrap.run-b .eye-left{left:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(18deg)}.char-wrap.run-b .eye-right{right:16px;top:24px;width:10px;height:12px;border-radius:50%}.char-wrap.run-b .mouth{left:24px;top:33px;width:16px;height:11px;border:4px solid #2a211e;border-top:0;border-radius:0 0 16px 16px;background:#ff8b86}.char-wrap.run-b .tongue{left:32px;top:38px;width:8px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 9px 9px}
+    .char-wrap.run-c .eye-left,.char-wrap.run-c .eye-right{top:24px;width:9px;height:13px;border-radius:50%}.char-wrap.run-c .eye-left{left:17px}.char-wrap.run-c .eye-right{right:17px}.char-wrap.run-c .mouth{left:27px;top:35px;width:10px;height:10px;border:4px solid #2a211e;border-radius:50%;background:#ff9d97}.char-wrap.run-c .tongue{display:none}
+    .char-wrap.run-d .eye-left{left:16px;top:27px;width:13px;height:4px;border-radius:10px;transform:rotate(-15deg)}.char-wrap.run-d .eye-right{right:16px;top:27px;width:13px;height:4px;border-radius:10px;transform:rotate(15deg)}.char-wrap.run-d .mouth{left:22px;top:34px;width:20px;height:11px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}.char-wrap.run-d .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
+    .char-wrap.fast .eye-left,.char-wrap.fast .eye-right{top:24px;width:11px;height:13px;border-radius:50%}.char-wrap.fast .eye-left{left:16px}.char-wrap.fast .eye-right{right:16px}.char-wrap.fast .mouth{left:26px;top:34px;width:12px;height:13px;border:4px solid #2a211e;border-radius:50%;background:#ff9d97}.char-wrap.fast .tongue{display:none}.char-wrap.late .eye-left,.char-wrap.late .eye-right{top:26px;width:12px;height:4px;border-radius:10px}.char-wrap.late .eye-left{left:15px;transform:rotate(35deg)}.char-wrap.late .eye-right{right:15px;transform:rotate(-35deg)}.char-wrap.late .mouth{left:24px;top:38px;width:16px;height:4px;border-radius:8px;background:#2a211e}.char-wrap.late .tongue{display:none}
+    .char-wrap.success .eye-left,.char-wrap.success .eye-right{top:28px;width:14px;height:4px;border-radius:10px}.char-wrap.success .eye-left{left:13px;transform:rotate(18deg)}.char-wrap.success .eye-right{right:13px;transform:rotate(-18deg)}.char-wrap.success .mouth{left:21px;top:33px;width:22px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 20px 20px;background:#ff8b86}.char-wrap.success .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}.char-wrap.perfect .eye-left,.char-wrap.perfect .eye-right{top:23px;width:10px;height:10px;border-radius:50%}.char-wrap.perfect .eye-left{left:16px}.char-wrap.perfect .eye-right{right:16px}.char-wrap.perfect .mouth{left:22px;top:32px;width:20px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}.char-wrap.perfect .tongue{left:29px;top:38px;width:8px;height:9px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
     @media(max-width:430px){.game{padding-left:12px;padding-right:12px;border-radius:0;min-height:100dvh}h1{font-size:27px}.buddy{width:82px;height:82px}.bubble{font-size:16px;min-height:82px}.timer{font-size:64px}.slot{width:78px;height:92px;font-size:38px}.main{min-height:82px;font-size:30px}.char-wrap{transform:scale(.88)}}
   </style>
 </head>
 <body>
-  <section class="game">
-    <button class="gear" id="gearBtn" type="button" aria-label="설정">⚙</button>
-    <h1 id="title">10초 맞추기</h1>
-    <div class="rule-top" id="topRule">9.97 ~ 10.02초에 멈추면 성공!</div>
-
-    <div class="buddy-row">
-      <div class="buddy" aria-hidden="true">
-        <div class="char-wrap idle" id="characterFace">
-          <span class="char-bump"></span><span class="char-main"></span><span class="eye-left"></span><span class="eye-right"></span><span class="mouth"></span><span class="tongue"></span><span class="cheek-left"></span><span class="cheek-right"></span><span class="hand-left"></span><span class="hand-right"></span><span class="spark1"></span><span class="spark2"></span>
-        </div>
-      </div>
-      <div class="bubble" id="bubble">10초를 맞추세요!</div>
-    </div>
-
-    <div class="timer" id="timer">0.00</div>
-    <div class="seconds">SECONDS</div>
-
-    <div class="slots"><div class="slot" id="s1">☕</div><div class="slot" id="s2">🎯</div><div class="slot" id="s3">⭐</div></div>
-
-    <div class="result" id="result" aria-live="polite">준비되면 시작!</div>
-    <button class="main" id="mainBtn" type="button">START</button>
-    <button class="again" id="againBtn" type="button">다시 하기</button>
-
-    <div class="foot">성공 범위: <b id="rangeText">9.97 ~ 10.02초</b><br>PERFECT: 정확히 <b id="targetText">10.00초</b></div>
-
-    <div class="settings" id="settings">
-      <input id="titleInput" type="text" maxlength="30" value="10초 맞추기" aria-label="제목">
-      <input id="minInput" type="number" step="0.01" value="9.97" aria-label="성공 최소 시간">
-      <input id="maxInput" type="number" step="0.01" value="10.02" aria-label="성공 최대 시간">
-      <input id="targetInput" type="number" step="0.01" value="10.00" aria-label="퍼펙트 시간">
-      <button id="saveBtn" type="button">적용</button>
-    </div>
-    <div class="confetti" id="confetti"></div>
-  </section>
-
-  <script>
-    (()=>{
-      const timer=document.getElementById('timer'),result=document.getElementById('result'),bubble=document.getElementById('bubble'),main=document.getElementById('mainBtn'),again=document.getElementById('againBtn');
-      const slots=[document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3')];
-      const gear=document.getElementById('gearBtn'),settings=document.getElementById('settings'),title=document.getElementById('title'),titleInput=document.getElementById('titleInput'),minInput=document.getElementById('minInput'),maxInput=document.getElementById('maxInput'),targetInput=document.getElementById('targetInput'),save=document.getElementById('saveBtn'),rangeText=document.getElementById('rangeText'),targetText=document.getElementById('targetText'),topRule=document.getElementById('topRule'),confetti=document.getElementById('confetti');
-      const character=document.getElementById('characterFace');
-      const symbols=['☕','🎯','⭐','🍀','🎉','🏆','🔥','10','🎈','💫'];
-      let running=false,start=0,raf=null,slotIntervals=[],min=9.97,max=10.02,target=10.00,faceTimer=null,faceIndex=0;
-
-      function setFace(state){character.className='char-wrap '+state}
-      function startFaceAnimation(){stopFaceAnimation();const cycle=['run-a','run-b'];faceIndex=0;setFace(cycle[faceIndex]);faceTimer=setInterval(()=>{faceIndex=(faceIndex+1)%cycle.length;setFace(cycle[faceIndex])},360)}
-      function stopFaceAnimation(){if(faceTimer){clearInterval(faceTimer);faceTimer=null}}
-      function render(){if(!running)return;timer.textContent=((performance.now()-start)/1000).toFixed(2);raf=requestAnimationFrame(render)}
-      function startSlots(){stopIntervals();slots.forEach(x=>x.classList.add('spin'));slotIntervals=slots.map((el,i)=>setInterval(()=>{el.textContent=symbols[Math.floor(Math.random()*symbols.length)]},85+i*25))}
-      function stopIntervals(){slotIntervals.forEach(clearInterval);slotIntervals=[];slots.forEach(x=>x.classList.remove('spin'))}
-      function resetSlots(){slots[0].textContent='☕';slots[1].textContent='🎯';slots[2].textContent='⭐'}
-      function celebrate(){confetti.innerHTML='';for(let i=0;i<30;i++){const p=document.createElement('span');p.className='piece';p.style.left=Math.random()*100+'%';p.style.top=(-40-Math.random()*100)+'px';p.style.background=['#ff970f','#ffd54f','#22c55e','#ef4444','#3b82f6','#a855f7'][Math.floor(Math.random()*6)];p.style.animationDuration=(1.1+Math.random()*1.1)+'s';confetti.appendChild(p)}setTimeout(()=>confetti.innerHTML='',2200)}
-      function startGame(){running=true;start=performance.now();result.className='result';result.textContent='측정 중...';bubble.textContent='10초를 맞추세요!';main.textContent='STOP';startSlots();startFaceAnimation();render()}
-      function stopGame(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();const shown=Math.round(((performance.now()-start)/1000)*100)/100;timer.textContent=shown.toFixed(2);main.textContent='다시 시작';
-        if(shown===target){result.className='result perfect';result.textContent='🎉 PERFECT! 정확히 '+target.toFixed(2)+'초!';bubble.textContent='완벽해요! 정확히 맞췄어요!';slots[0].textContent='👑';slots[1].textContent='10';slots[2].textContent='👑';setFace('perfect');celebrate()}
-        else if(shown>=min&&shown<=max){result.className='result ok';result.textContent='🎊 성공! 합격입니다!';bubble.textContent='성공했어요! 한 번 더 도전!';slots[0].textContent='🎉';slots[1].textContent='🏆';slots[2].textContent='🎉';setFace('success');celebrate()}
-        else if(shown<min){result.className='result fail';result.textContent='아쉽다! '+Math.abs(target-shown).toFixed(2)+'초 빨랐어요';bubble.innerHTML='조금 빨랐어요!<br>다음엔 살짝 더 늦게!';resetSlots();setFace('fast')}
-        else{result.className='result fail';result.textContent='아쉽다! '+Math.abs(shown-target).toFixed(2)+'초 늦었어요';bubble.innerHTML='조금 늦었어요!<br>다음엔 살짝 더 빨리!';resetSlots();setFace('late')}
-      }
-      function reset(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();timer.textContent='0.00';result.className='result';result.textContent='준비되면 시작!';bubble.textContent='10초를 맞추세요!';main.textContent='START';resetSlots();setFace('idle')}
-      main.addEventListener('click',()=>running?stopGame():startGame());
-      again.addEventListener('click',reset);
-      gear.addEventListener('click',()=>settings.classList.toggle('show'));
-      save.addEventListener('click',()=>{const a=parseFloat(minInput.value),b=parseFloat(maxInput.value),t=parseFloat(targetInput.value),ttl=titleInput.value.trim();if(!Number.isFinite(a)||!Number.isFinite(b)||!Number.isFinite(t)||a>b){alert('설정을 다시 확인하세요.');return}if(ttl)title.textContent=ttl;min=+a.toFixed(2);max=+b.toFixed(2);target=+t.toFixed(2);rangeText.textContent=min.toFixed(2)+' ~ '+max.toFixed(2)+'초';targetText.textContent=target.toFixed(2)+'초';topRule.textContent=min.toFixed(2)+' ~ '+max.toFixed(2)+'초에 멈추면 성공!';settings.classList.remove('show');reset()});
-      if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
-      reset();
-    })();
-  </script>
-</body>
-</html>
+<section class="game"><button class="gear" id="gearBtn" type="button" aria-label="설정">⚙</button><h1 id="title">10초 맞추기</h1><div class="rule-top" id="topRule">9.97 ~ 10.02초에 멈추면 성공!</div><div class="buddy-row"><div class="buddy" aria-hidden="true"><div class="char-wrap idle" id="characterFace"><span class="char-bump"></span><span class="char-main"></span><span class="eye-left"></span><span class="eye-right"></span><span class="mouth"></span><span class="tongue"></span><span class="cheek-left"></span><span class="cheek-right"></span><span class="hand-left"></span><span class="hand-right"></span><span class="spark1"></span><span class="spark2"></span></div></div><div class="bubble" id="bubble">10초를 맞추세요!</div></div><div class="timer" id="timer">0.00</div><div class="seconds">SECONDS</div><div class="slots"><div class="slot" id="s1">☕</div><div class="slot" id="s2">🎯</div><div class="slot" id="s3">⭐</div></div><div class="result" id="result" aria-live="polite">준비되면 시작!</div><button class="main" id="mainBtn" type="button">START</button><button class="again" id="againBtn" type="button">다시 하기</button><div class="foot">성공 범위: <b id="rangeText">9.97 ~ 10.02초</b><br>PERFECT: 정확히 <b id="targetText">10.00초</b></div><div class="settings" id="settings"><input id="titleInput" type="text" maxlength="30" value="10초 맞추기"><input id="minInput" type="number" step="0.01" value="9.97"><input id="maxInput" type="number" step="0.01" value="10.02"><input id="targetInput" type="number" step="0.01" value="10.00"><button id="saveBtn" type="button">적용</button></div><div class="confetti" id="confetti"></div></section>
+<script>(()=>{const timer=document.getElementById('timer'),result=document.getElementById('result'),bubble=document.getElementById('bubble'),main=document.getElementById('mainBtn'),again=document.getElementById('againBtn'),slots=[document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3')],gear=document.getElementById('gearBtn'),settings=document.getElementById('settings'),title=document.getElementById('title'),titleInput=document.getElementById('titleInput'),minInput=document.getElementById('minInput'),maxInput=document.getElementById('maxInput'),targetInput=document.getElementById('targetInput'),save=document.getElementById('saveBtn'),rangeText=document.getElementById('rangeText'),targetText=document.getElementById('targetText'),topRule=document.getElementById('topRule'),confetti=document.getElementById('confetti'),character=document.getElementById('characterFace'),symbols=['☕','🎯','⭐','🍀','🎉','🏆','🔥','10','🎈','💫'];let running=false,start=0,raf=null,slotIntervals=[],min=9.97,max=10.02,target=10,faceTimer=null,faceIndex=0,audioCtx=null,lastTickSecond=-1;function setFace(s){character.className='char-wrap '+s}function ensureAudio(){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}catch(e){}}function tone(f,d=.06,v=.025,type='sine',delay=0){if(!audioCtx)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime+delay;o.type=type;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+d)}function playTick(s){if(s>0)tone(s===10?880:520,.045,s===10?.04:.018,'square')}function playResultSound(k){if(k==='perfect'){tone(660,.09,.035);tone(880,.11,.035,'sine',.09);tone(1100,.14,.04,'sine',.19)}else if(k==='success'){tone(620,.08,.03);tone(820,.12,.035,'sine',.08)}else{tone(240,.12,.03,'sawtooth');tone(170,.16,.025,'sawtooth',.10)}}function startFaceAnimation(){stopFaceAnimation();const c=['run-a','run-b','run-c','run-d','idle'];faceIndex=0;setFace(c[0]);faceTimer=setInterval(()=>{faceIndex=(faceIndex+1)%c.length;setFace(c[faceIndex])},420)}function stopFaceAnimation(){if(faceTimer){clearInterval(faceTimer);faceTimer=null}}function render(){if(!running)return;const e=(performance.now()-start)/1000;timer.textContent=e.toFixed(2);const w=Math.floor(e);if(w!==lastTickSecond&&w>=1&&w<=10){lastTickSecond=w;playTick(w)}raf=requestAnimationFrame(render)}function startSlots(){stopIntervals();slots.forEach(x=>x.classList.add('spin'));slotIntervals=slots.map((el,i)=>setInterval(()=>el.textContent=symbols[Math.floor(Math.random()*symbols.length)],85+i*25))}function stopIntervals(){slotIntervals.forEach(clearInterval);slotIntervals=[];slots.forEach(x=>x.classList.remove('spin'))}function resetSlots(){slots[0].textContent='☕';slots[1].textContent='🎯';slots[2].textContent='⭐'}function celebrate(){confetti.innerHTML='';for(let i=0;i<30;i++){const p=document.createElement('span');p.className='piece';p.style.left=Math.random()*100+'%';p.style.top=(-40-Math.random()*100)+'px';p.style.background=['#ff970f','#ffd54f','#22c55e','#ef4444','#3b82f6','#a855f7'][Math.floor(Math.random()*6)];p.style.animationDuration=(1.1+Math.random()*1.1)+'s';confetti.appendChild(p)}setTimeout(()=>confetti.innerHTML='',2200)}function startGame(){ensureAudio();running=true;start=performance.now();lastTickSecond=-1;result.className='result';result.textContent='측정 중...';bubble.textContent='10초를 맞추세요!';main.textContent='STOP';startSlots();startFaceAnimation();render()}function stopGame(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();const shown=Math.round(((performance.now()-start)/1000)*100)/100;timer.textContent=shown.toFixed(2);main.textContent='다시 시작';if(shown===target){result.className='result perfect';result.textContent='🎉 PERFECT! 정확히 '+target.toFixed(2)+'초!';bubble.textContent='완벽해요! 정확히 맞췄어요!';slots[0].textContent='👑';slots[1].textContent='10';slots[2].textContent='👑';setFace('perfect');playResultSound('perfect');celebrate()}else if(shown>=min&&shown<=max){result.className='result ok';result.textContent='🎊 성공! 합격입니다!';bubble.textContent='성공했어요! 한 번 더 도전!';slots[0].textContent='🎉';slots[1].textContent='🏆';slots[2].textContent='🎉';setFace('success');playResultSound('success');celebrate()}else if(shown<min){result.className='result fail';result.textContent='아쉽다! '+Math.abs(target-shown).toFixed(2)+'초 빨랐어요';bubble.innerHTML='조금 빨랐어요!<br>다음엔 살짝 더 늦게!';resetSlots();setFace('fast');playResultSound('fail')}else{result.className='result fail';result.textContent='아쉽다! '+Math.abs(shown-target).toFixed(2)+'초 늦었어요';bubble.innerHTML='조금 늦었어요!<br>다음엔 살짝 더 빨리!';resetSlots();setFace('late');playResultSound('fail')}}function reset(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();timer.textContent='0.00';result.className='result';result.textContent='준비되면 시작!';bubble.textContent='10초를 맞추세요!';main.textContent='START';resetSlots();setFace('idle')}main.addEventListener('click',()=>{ensureAudio();running?stopGame():startGame()});again.addEventListener('click',reset);gear.addEventListener('click',()=>settings.classList.toggle('show'));save.addEventListener('click',()=>{const a=parseFloat(minInput.value),b=parseFloat(maxInput.value),t=parseFloat(targetInput.value),ttl=titleInput.value.trim();if(!Number.isFinite(a)||!Number.isFinite(b)||!Number.isFinite(t)||a>b){alert('설정을 다시 확인하세요.');return}if(ttl)title.textContent=ttl;min=+a.toFixed(2);max=+b.toFixed(2);target=+t.toFixed(2);rangeText.textContent=min.toFixed(2)+' ~ '+max.toFixed(2)+'초';targetText.textContent=target.toFixed(2)+'초';topRule.textContent=min.toFixed(2)+' ~ '+max.toFixed(2)+'초에 멈추면 성공!';settings.classList.remove('show');reset()});if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));reset()})();</script>
+</body></html>
