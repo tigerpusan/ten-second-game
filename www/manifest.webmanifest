@@ -1,0 +1,10 @@
+{
+  "name": "10초 맞추기",
+  "short_name": "10초 맞추기",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8ef",
+  "theme_color": "#ff970f",
+  "lang": "ko",
+  "icons": []
+}
