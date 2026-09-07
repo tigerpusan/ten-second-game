@@ -1,10 +1,17 @@
 {
-  "name": "10초 맞추기",
-  "short_name": "10초 맞추기",
+  "name": "10초 게임",
+  "short_name": "10초 게임",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fff8ef",
   "theme_color": "#ff970f",
   "lang": "ko",
-  "icons": []
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
 }
