@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffb54c"/>
+      <stop offset="100%" stop-color="#ff970f"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#bg)"/>
+  <rect x="76" y="76" width="360" height="360" rx="92" fill="#fff7ef" stroke="#f2d2ad" stroke-width="8"/>
+  <path d="M170 170c10-34 49-46 81-38 14-22 48-25 69-6 21 18 23 48 11 69 19 27 17 65-4 90-29 36-84 48-129 31-43-16-72-59-67-103 2-18 9-31 19-43-2-3-3-6-3-10 0-13 10-24 23-24z" fill="#fff" stroke="#2a211e" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="215" cy="252" rx="20" ry="24" fill="#2a211e"/>
+  <path d="M282 257c22 2 36 18 40 32" fill="none" stroke="#2a211e" stroke-width="16" stroke-linecap="round"/>
+  <path d="M228 309c13 21 48 29 83 11" fill="none" stroke="#2a211e" stroke-width="16" stroke-linecap="round"/>
+  <path d="M249 318c6 12 18 21 31 24" fill="none" stroke="#ff7070" stroke-width="16" stroke-linecap="round"/>
+  <ellipse cx="180" cy="304" rx="28" ry="18" fill="#ffb0a7" opacity="0.9"/>
+  <ellipse cx="334" cy="304" rx="28" ry="18" fill="#ffb0a7" opacity="0.9"/>
+  <ellipse cx="169" cy="346" rx="28" ry="26" fill="#fff" stroke="#2a211e" stroke-width="14"/>
+  <ellipse cx="344" cy="346" rx="28" ry="26" fill="#fff" stroke="#2a211e" stroke-width="14"/>
+  <rect x="353" y="120" width="28" height="72" rx="14" fill="#ffbe4a" transform="rotate(24 367 156)"/>
+  <rect x="392" y="126" width="28" height="56" rx="14" fill="#ffbe4a" transform="rotate(-14 406 154)"/>
+</svg>
