@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>10초 맞추기</title>
+  <title>10초 게임</title>
   <meta name="theme-color" content="#ff970f" />
+  <meta name="application-name" content="10초 게임" />
   <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <style>
     :root{--coffee:#3e2b27;--orange:#ff970f;--orange2:#ffae3b;--line:#f2d2ad;--red:#ff4747;--muted:#7a5b46;--ok:#16a34a;--perfect:#d97706}
     *{box-sizing:border-box}
@@ -38,20 +40,61 @@
     .piece{position:absolute;width:9px;height:15px;border-radius:2px;animation:fall 1.6s linear forwards}
     @keyframes fall{from{transform:translateY(-30px) rotate(0)}to{transform:translateY(650px) rotate(540deg)}}
 
-    /* 귀엽고 장난스러운 첫 번째 느낌의 캐릭터 */
-    .char-wrap{position:relative;width:64px;height:64px}
+    .char-wrap{position:relative;width:64px;height:64px;transform-origin:center}
     .char-main{position:absolute;inset:6px 4px;background:#fff;border:5px solid #2a211e;border-radius:50% 48% 52% 50%}
     .char-bump{position:absolute;left:10px;top:-2px;width:22px;height:20px;background:#fff;border:5px solid #2a211e;border-bottom:0;border-right-width:4px;border-radius:55% 55% 0 0;transform:rotate(-10deg)}
-    .eye-left,.eye-right{position:absolute;top:24px;width:10px;height:12px;background:#2a211e;border-radius:50%}
-    .eye-left{left:17px}.eye-right{right:16px;height:4px;width:12px;border-radius:10px;transform:rotate(-18deg);top:28px}
-    .mouth{position:absolute;left:25px;top:33px;width:12px;height:9px;border:4px solid #2a211e;border-top:0;border-radius:0 0 14px 14px;background:#ff8b86}
-    .tongue{position:absolute;left:31px;top:38px;width:9px;height:10px;background:#ff7a72;border:3px solid #2a211e;border-top:0;border-radius:0 0 10px 10px;transform:rotate(8deg)}
-    .cheek-left,.cheek-right{position:absolute;top:34px;width:10px;height:8px;background:#ffb0a7;border-radius:50%;opacity:.9}
+    .eye-left,.eye-right{position:absolute;background:#2a211e;transition:all .18s ease}
+    .mouth{position:absolute;transition:all .18s ease}
+    .tongue{position:absolute;background:#ff7a72;transition:all .18s ease}
+    .cheek-left,.cheek-right{position:absolute;top:34px;width:10px;height:8px;background:#ffb0a7;border-radius:50%;opacity:.9;transition:all .18s ease}
     .cheek-left{left:8px}.cheek-right{right:8px}
     .hand-left,.hand-right{position:absolute;bottom:6px;width:16px;height:14px;background:#fff;border:4px solid #2a211e;border-radius:50%}
     .hand-left{left:2px}.hand-right{right:2px}
-    .spark1,.spark2{position:absolute;background:#ffbe4a;border-radius:6px}
-    .spark1{right:-3px;top:4px;width:7px;height:18px;transform:rotate(25deg)}.spark2{right:8px;top:1px;width:7px;height:14px;transform:rotate(-20deg)}
+    .spark1,.spark2{position:absolute;background:#ffbe4a;border-radius:6px;transition:all .18s ease}
+    .spark1{right:-3px;top:4px;width:7px;height:18px;transform:rotate(25deg)}
+    .spark2{right:8px;top:1px;width:7px;height:14px;transform:rotate(-20deg)}
+
+    .char-wrap.idle .eye-left{left:17px;top:24px;width:10px;height:12px;border-radius:50%}
+    .char-wrap.idle .eye-right{right:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(-18deg)}
+    .char-wrap.idle .mouth{left:25px;top:33px;width:12px;height:9px;border:4px solid #2a211e;border-top:0;border-radius:0 0 14px 14px;background:#ff8b86}
+    .char-wrap.idle .tongue{left:31px;top:38px;width:9px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 10px 10px;transform:rotate(8deg)}
+
+    .char-wrap.run-a{transform:translateY(-1px)}
+    .char-wrap.run-a .eye-left,.char-wrap.run-a .eye-right{top:25px;width:10px;height:10px;border-radius:50%}
+    .char-wrap.run-a .eye-left{left:16px}.char-wrap.run-a .eye-right{right:16px}
+    .char-wrap.run-a .mouth{left:22px;top:34px;width:20px;height:10px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}
+    .char-wrap.run-a .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
+
+    .char-wrap.run-b{transform:translateY(0)}
+    .char-wrap.run-b .eye-left{left:16px;top:28px;width:12px;height:4px;border-radius:10px;transform:rotate(18deg)}
+    .char-wrap.run-b .eye-right{right:16px;top:24px;width:10px;height:12px;border-radius:50%}
+    .char-wrap.run-b .mouth{left:24px;top:33px;width:16px;height:11px;border:4px solid #2a211e;border-top:0;border-radius:0 0 16px 16px;background:#ff8b86}
+    .char-wrap.run-b .tongue{left:32px;top:38px;width:8px;height:10px;border:3px solid #2a211e;border-top:0;border-radius:0 0 9px 9px}
+
+    .char-wrap.fast .eye-left,.char-wrap.fast .eye-right{top:24px;width:11px;height:13px;border-radius:50%}
+    .char-wrap.fast .eye-left{left:16px}.char-wrap.fast .eye-right{right:16px}
+    .char-wrap.fast .mouth{left:26px;top:34px;width:12px;height:13px;border:4px solid #2a211e;border-radius:50%;background:#ff9d97}
+    .char-wrap.fast .tongue{display:none}
+
+    .char-wrap.late .eye-left,.char-wrap.late .eye-right{top:26px;width:12px;height:4px;border-radius:10px}
+    .char-wrap.late .eye-left{left:15px;transform:rotate(35deg)}
+    .char-wrap.late .eye-right{right:15px;transform:rotate(-35deg)}
+    .char-wrap.late .mouth{left:24px;top:38px;width:16px;height:4px;border-radius:8px;background:#2a211e}
+    .char-wrap.late .tongue{display:none}
+
+    .char-wrap.success .eye-left,.char-wrap.success .eye-right{top:28px;width:14px;height:4px;border-radius:10px;background:#2a211e}
+    .char-wrap.success .eye-left{left:13px;transform:rotate(18deg)}
+    .char-wrap.success .eye-right{right:13px;transform:rotate(-18deg)}
+    .char-wrap.success .mouth{left:21px;top:33px;width:22px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 20px 20px;background:#ff8b86}
+    .char-wrap.success .tongue{left:29px;top:39px;width:8px;height:8px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
+
+    .char-wrap.perfect .eye-left,.char-wrap.perfect .eye-right{top:23px;width:10px;height:10px;border-radius:50%}
+    .char-wrap.perfect .eye-left{left:16px;box-shadow:0 0 0 3px rgba(255,190,74,.35)}
+    .char-wrap.perfect .eye-right{right:16px;box-shadow:0 0 0 3px rgba(255,190,74,.35)}
+    .char-wrap.perfect .mouth{left:22px;top:32px;width:20px;height:12px;border:4px solid #2a211e;border-top:0;border-radius:0 0 18px 18px;background:#ff8b86}
+    .char-wrap.perfect .tongue{left:29px;top:38px;width:8px;height:9px;border:2px solid #2a211e;border-top:0;border-radius:0 0 8px 8px}
+    .char-wrap.perfect .spark1{right:-4px;top:0;height:22px}
+    .char-wrap.perfect .spark2{right:8px;top:-3px;height:18px}
 
     @media(max-width:430px){.game{padding-left:12px;padding-right:12px;border-radius:0;min-height:100dvh}h1{font-size:27px}.buddy{width:82px;height:82px}.bubble{font-size:16px;min-height:82px}.timer{font-size:64px}.slot{width:78px;height:92px;font-size:38px}.main{min-height:82px;font-size:30px}.char-wrap{transform:scale(.88)}}
   </style>
@@ -64,7 +107,7 @@
 
     <div class="buddy-row">
       <div class="buddy" aria-hidden="true">
-        <div class="char-wrap">
+        <div class="char-wrap idle" id="characterFace">
           <span class="char-bump"></span><span class="char-main"></span><span class="eye-left"></span><span class="eye-right"></span><span class="mouth"></span><span class="tongue"></span><span class="cheek-left"></span><span class="cheek-right"></span><span class="hand-left"></span><span class="hand-right"></span><span class="spark1"></span><span class="spark2"></span>
         </div>
       </div>
@@ -97,22 +140,26 @@
       const timer=document.getElementById('timer'),result=document.getElementById('result'),bubble=document.getElementById('bubble'),main=document.getElementById('mainBtn'),again=document.getElementById('againBtn');
       const slots=[document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3')];
       const gear=document.getElementById('gearBtn'),settings=document.getElementById('settings'),title=document.getElementById('title'),titleInput=document.getElementById('titleInput'),minInput=document.getElementById('minInput'),maxInput=document.getElementById('maxInput'),targetInput=document.getElementById('targetInput'),save=document.getElementById('saveBtn'),rangeText=document.getElementById('rangeText'),targetText=document.getElementById('targetText'),topRule=document.getElementById('topRule'),confetti=document.getElementById('confetti');
+      const character=document.getElementById('characterFace');
       const symbols=['☕','🎯','⭐','🍀','🎉','🏆','🔥','10','🎈','💫'];
-      let running=false,start=0,raf=null,slotIntervals=[],min=9.97,max=10.02,target=10.00;
+      let running=false,start=0,raf=null,slotIntervals=[],min=9.97,max=10.02,target=10.00,faceTimer=null,faceIndex=0;
 
+      function setFace(state){character.className='char-wrap '+state}
+      function startFaceAnimation(){stopFaceAnimation();const cycle=['run-a','run-b'];faceIndex=0;setFace(cycle[faceIndex]);faceTimer=setInterval(()=>{faceIndex=(faceIndex+1)%cycle.length;setFace(cycle[faceIndex])},360)}
+      function stopFaceAnimation(){if(faceTimer){clearInterval(faceTimer);faceTimer=null}}
       function render(){if(!running)return;timer.textContent=((performance.now()-start)/1000).toFixed(2);raf=requestAnimationFrame(render)}
       function startSlots(){stopIntervals();slots.forEach(x=>x.classList.add('spin'));slotIntervals=slots.map((el,i)=>setInterval(()=>{el.textContent=symbols[Math.floor(Math.random()*symbols.length)]},85+i*25))}
       function stopIntervals(){slotIntervals.forEach(clearInterval);slotIntervals=[];slots.forEach(x=>x.classList.remove('spin'))}
       function resetSlots(){slots[0].textContent='☕';slots[1].textContent='🎯';slots[2].textContent='⭐'}
       function celebrate(){confetti.innerHTML='';for(let i=0;i<30;i++){const p=document.createElement('span');p.className='piece';p.style.left=Math.random()*100+'%';p.style.top=(-40-Math.random()*100)+'px';p.style.background=['#ff970f','#ffd54f','#22c55e','#ef4444','#3b82f6','#a855f7'][Math.floor(Math.random()*6)];p.style.animationDuration=(1.1+Math.random()*1.1)+'s';confetti.appendChild(p)}setTimeout(()=>confetti.innerHTML='',2200)}
-      function startGame(){running=true;start=performance.now();result.className='result';result.textContent='측정 중...';bubble.textContent='10초를 맞추세요!';main.textContent='STOP';startSlots();render()}
-      function stopGame(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();const shown=Math.round(((performance.now()-start)/1000)*100)/100;timer.textContent=shown.toFixed(2);main.textContent='다시 시작';
-        if(shown===target){result.className='result perfect';result.textContent='🎉 PERFECT! 정확히 '+target.toFixed(2)+'초!';bubble.textContent='완벽해요! 정확히 맞췄어요!';slots[0].textContent='👑';slots[1].textContent='10';slots[2].textContent='👑';celebrate()}
-        else if(shown>=min&&shown<=max){result.className='result ok';result.textContent='🎊 성공! 합격입니다!';bubble.textContent='성공했어요! 한 번 더 도전!';slots[0].textContent='🎉';slots[1].textContent='🏆';slots[2].textContent='🎉';celebrate()}
-        else if(shown<min){result.className='result fail';result.textContent='아쉽다! '+Math.abs(target-shown).toFixed(2)+'초 빨랐어요';bubble.innerHTML='조금 빨랐어요!<br>다음엔 살짝 더 늦게!';resetSlots()}
-        else{result.className='result fail';result.textContent='아쉽다! '+Math.abs(shown-target).toFixed(2)+'초 늦었어요';bubble.innerHTML='조금 늦었어요!<br>다음엔 살짝 더 빨리!';resetSlots()}
+      function startGame(){running=true;start=performance.now();result.className='result';result.textContent='측정 중...';bubble.textContent='10초를 맞추세요!';main.textContent='STOP';startSlots();startFaceAnimation();render()}
+      function stopGame(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();const shown=Math.round(((performance.now()-start)/1000)*100)/100;timer.textContent=shown.toFixed(2);main.textContent='다시 시작';
+        if(shown===target){result.className='result perfect';result.textContent='🎉 PERFECT! 정확히 '+target.toFixed(2)+'초!';bubble.textContent='완벽해요! 정확히 맞췄어요!';slots[0].textContent='👑';slots[1].textContent='10';slots[2].textContent='👑';setFace('perfect');celebrate()}
+        else if(shown>=min&&shown<=max){result.className='result ok';result.textContent='🎊 성공! 합격입니다!';bubble.textContent='성공했어요! 한 번 더 도전!';slots[0].textContent='🎉';slots[1].textContent='🏆';slots[2].textContent='🎉';setFace('success');celebrate()}
+        else if(shown<min){result.className='result fail';result.textContent='아쉽다! '+Math.abs(target-shown).toFixed(2)+'초 빨랐어요';bubble.innerHTML='조금 빨랐어요!<br>다음엔 살짝 더 늦게!';resetSlots();setFace('fast')}
+        else{result.className='result fail';result.textContent='아쉽다! '+Math.abs(shown-target).toFixed(2)+'초 늦었어요';bubble.innerHTML='조금 늦었어요!<br>다음엔 살짝 더 빨리!';resetSlots();setFace('late')}
       }
-      function reset(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();timer.textContent='0.00';result.className='result';result.textContent='준비되면 시작!';bubble.textContent='10초를 맞추세요!';main.textContent='START';resetSlots()}
+      function reset(){running=false;if(raf)cancelAnimationFrame(raf);stopIntervals();stopFaceAnimation();timer.textContent='0.00';result.className='result';result.textContent='준비되면 시작!';bubble.textContent='10초를 맞추세요!';main.textContent='START';resetSlots();setFace('idle')}
       main.addEventListener('click',()=>running?stopGame():startGame());
       again.addEventListener('click',reset);
       gear.addEventListener('click',()=>settings.classList.toggle('show'));
